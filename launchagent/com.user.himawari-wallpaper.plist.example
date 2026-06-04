@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.user.himawari-wallpaper</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-lc</string>
+      <string>HIMAWARI_TILES=20 HIMAWARI_BBOX_SOUTH=5 HIMAWARI_BBOX_WEST=95 HIMAWARI_BBOX_NORTH=55 HIMAWARI_BBOX_EAST=150 HIMAWARI_PADDING=1.18 python3 "$HOME/bin/himawari-wallpaper.py" &amp;&amp; "$HOME/bin/apply-himawari-wallpaper.sh"</string>
+    </array>
+
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+  </dict>
+</plist>
