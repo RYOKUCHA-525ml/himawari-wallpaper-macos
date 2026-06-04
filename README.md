@@ -85,3 +85,40 @@ The default auto-update area is East Asia:
 - East: 150
 - Padding: 1.18
 - Tile mode: 20d
+
+## Auto update every 30 minutes
+
+You can use macOS LaunchAgent to update the wallpaper automatically every 30 minutes.
+
+First, copy the scripts to `~/bin`:
+
+    mkdir -p ~/bin
+    cp scripts/himawari-wallpaper.py ~/bin/
+    cp scripts/apply-himawari-wallpaper.sh ~/bin/
+    chmod +x ~/bin/himawari-wallpaper.py
+    chmod +x ~/bin/apply-himawari-wallpaper.sh
+
+Then install the LaunchAgent:
+
+    mkdir -p ~/Library/LaunchAgents
+    cp launchagent/com.user.himawari-wallpaper.plist.example ~/Library/LaunchAgents/com.user.himawari-wallpaper.plist
+    launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.user.himawari-wallpaper.plist 2>/dev/null || true
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.user.himawari-wallpaper.plist
+    launchctl enable gui/$(id -u)/com.user.himawari-wallpaper
+    launchctl kickstart -k gui/$(id -u)/com.user.himawari-wallpaper
+
+This runs the wallpaper updater every 1800 seconds, or every 30 minutes.
+
+To stop auto updates:
+
+    launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.user.himawari-wallpaper.plist
+    rm ~/Library/LaunchAgents/com.user.himawari-wallpaper.plist
+
+The default auto-update area is East Asia:
+
+- South: 5
+- West: 95
+- North: 55
+- East: 150
+- Padding: 1.18
+- Tile mode: 20d
